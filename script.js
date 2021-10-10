@@ -1,5 +1,5 @@
 let apikey = "ca77d6416875b9f8966e57181ce172b4";
-// let currentDate = moment().format("MM/DD/YYYY");
+let currentDate = moment().format("MM/DD/YYYY");
 let unit = "imperial";
 let citiesListWrapper = document.querySelector("#citiesList");
 let cityBtns = document.querySelector(".city-button");
@@ -25,5 +25,27 @@ $(".city-button").on("click", function () {
     apiCall($(this).text());
 });
 
+function apiCall(cityEntered) {
+    let weatherUrl = "https://api.openweathermap.org/data/2.5/weather?q=" +
+    cityEntered +
+    "&units=metric&appid=" +
+    this.apiKey;
+    fetch(weatherUrl)
+        .then(function (response) {
+        return response.json();
+        })
+        .then(function (data) {
+            let cityE1 = document.querySelector("#cityName");
+            cityE1.textContent = cityEntered + "(" + (currentDate) + ")"
+            let tempE1 = document.querySelector("#temp");
+            tempE1.textContent = "Temperature: " + parseInt(data.main.temp) + "°F";
+            let humidityE1 = document.querySelector("#humidity");
 
+        })
+
+    
+
+
+
+}
 
