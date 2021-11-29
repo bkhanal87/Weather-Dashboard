@@ -1,5 +1,5 @@
 let apikey = "ca77d6416875b9f8966e57181ce172b4";
-// let currentDate = moment().format("MM/D/YYYY");
+let currentDate = moment().format("MM/D/YYYY");
 let unit = "imperial";
 let citiesListWrapper = document.querySelector("#citiesList");
 let cityBtns = document.querySelectorAll(".city-button");
@@ -16,7 +16,7 @@ function onPageLoad() {
     li.appendChild(button);
     citiesListWrapper.appendChild(li);
   });
-}
+};
 
 onPageLoad();
 
@@ -39,7 +39,7 @@ function apiCall(cityEntered) {
     })
     .then(function (data) {
       let cityEl = document.querySelector("#cityName");
-      cityEl.textContent = cityEntered + " (" + currentDate + ")";
+      cityEl.textContent = cityEntered + ' (' + (currentDate) + ')';
       let tempEl = document.querySelector("#temp");
       tempEl.textContent = "Temperature: " + parseInt(data.main.temp) + "°F";
       let humidityEl = document.querySelector("#humidity");
@@ -51,12 +51,12 @@ function apiCall(cityEntered) {
       let lon = parseInt(data.coord.lon);
 
       let uvIndexUrl =
-        "https:api.openweather.org/data/2.5/uvi?lat=" +
+        "https://api.openweather.org/data/2.5/uvi?lat=" +
         lat +
         "&lon=" +
         lon +
         "appid=" +
-        appkey;
+        apikey;
 
       fetch(uvIndexUrl)
         .then(function (response) {
@@ -100,7 +100,7 @@ function fiveDayAPICall(cityEntered) {
       arrayList.forEach((dayObject) => {
         let noon = dayObject.dt_txt.includes("12:00:00");
         if (noon) {
-          let date = dayObject.dt_txt.split("")[0];
+          let date = dayObject.dt_txt.split(' ')[0];
           let temp = dayObject.main.temp;
           let humidity = dayObject.main.humidity;
           let icon = dayObject.weather[0].icon;
@@ -119,7 +119,7 @@ function fiveDayAPICall(cityEntered) {
 
 // To clear out the previous 5 day data if another city is searched for
 
-function clearFiveDay() {
+function clear5Day() {
     let forecast = document.querySelector(".forecastWrapper");
     forecast.innerHTML = '';
 }
