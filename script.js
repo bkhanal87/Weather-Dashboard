@@ -51,10 +51,11 @@ function apiCall(cityEntered) {
       let lon = parseInt(data.coord.lon);
 
       let uvIndexUrl =
-        "https://api.openweather.org/data/2.5/uvi?lat=" +
+        "https://api.openweathermap.org/data/2.5/onecall?lat=" +
         lat +
         "&lon=" +
         lon +
+        "&exclude = current, minutely, hourly" +
         "appid=" +
         apikey;
 
